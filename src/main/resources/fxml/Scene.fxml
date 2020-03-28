@@ -10,12 +10,12 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.corsi.FXMLController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polito.tdp.corsi.FXMLController">
    <top>
       <GridPane BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
@@ -30,26 +30,18 @@
             </TextField>
             <TextField fx:id="txtCorso" promptText="Codice corso" GridPane.rowIndex="1">
                <GridPane.margin>
-                  <Insets right="10.0" top="10.0" />
+                  <Insets right="10.0" />
                </GridPane.margin>
             </TextField>
-            <Button fx:id="btnCorsiPerPeriodo" mnemonicParsing="false" onAction="#corsiPerPeriodo" text="Stampa Corsi" GridPane.columnIndex="1" />
+            <Button fx:id="btnCorsiPerperiodo" mnemonicParsing="false" onAction="#corsiPerPeriodo" text="Stampa Corsi" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+            <Button fx:id="btnStudenti" mnemonicParsing="false" onAction="#stampaStudenti" text="Stampa Studenti" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
             <Button fx:id="btnNumeroStudenti" mnemonicParsing="false" onAction="#numeroStudenti" text="Numero Studenti" GridPane.columnIndex="2" />
-            <Button fx:id="btnStudenti" mnemonicParsing="false" onAction="#stampaStudenti" text="Stampa Studenti" GridPane.columnIndex="1" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets top="10.0" />
-               </GridPane.margin>
-            </Button>
-            <Button fx:id="btnDivisioneStudenti" mnemonicParsing="false" onAction="#stampaDivisione" text="Divisione Studenti" GridPane.columnIndex="2" GridPane.rowIndex="1">
-               <GridPane.margin>
-                  <Insets top="10.0" />
-               </GridPane.margin>
-            </Button>
+            <Button fx:id="btnDivisioneStudenti" mnemonicParsing="false" onAction="#stampaDivisione" text="Divisione Studenti" GridPane.columnIndex="2" GridPane.rowIndex="1" />
          </children>
       </GridPane>
    </top>
    <center>
-      <TextArea fx:id="txtRisultato" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <TextArea fx:id="txtRisultato" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets top="30.0" />
          </BorderPane.margin>

@@ -7,18 +7,17 @@ import it.polito.tdp.corsi.db.CorsoDAO;
 
 public class Model {
 	
-	private CorsoDAO dao;
+	CorsoDAO dao= new CorsoDAO(); //per non crearlo mille volte in ogni metodo 
 	
-	public Model() {
-		dao = new CorsoDAO();
-	}
 	
 	public List<Corso> getCorsiByPeriodo(Integer pd){
-		return dao.getCorsiByPeriodo(pd);
+	return dao.getCorsiByperiodo(pd); 
 	}
 	
-
-	public Map<Corso,Integer> getIscrittiByPeriodo(Integer pd){
-		return dao.getIscrittiByPeriodo(pd);
+	public Map<Corso, Integer> getIscrittiCorsoByPeriodo(Integer pd){
+		return dao.getIscrittiCorsoByPeriodo(pd); 
+		
+		
 	}
+
 }

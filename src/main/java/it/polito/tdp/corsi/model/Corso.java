@@ -1,65 +1,58 @@
 package it.polito.tdp.corsi.model;
 
+//POJO relativo alla tabella corso del db 'iscirtticorso'
 public class Corso {
-	private String codins;
-	private Integer crediti;
-	private String nome;
-	private Integer pd;
+
 	
+	private String codins; 
+	private Integer crediti; 
+	private String nome; 
+	private Integer pd; //periodo didattico
 	
 	public Corso(String codins, Integer crediti, String nome, Integer pd) {
-		this.codins = codins;
-		this.crediti = crediti;
-		this.nome = nome;
-		this.pd = pd;
+		this.codins=codins; 
+		this.crediti=crediti; 
+		this.nome=nome; 
+		this.pd=pd; 
+		
 	}
-
 
 	public String getCodins() {
 		return codins;
 	}
 
-
 	public void setCodins(String codins) {
 		this.codins = codins;
 	}
-
 
 	public Integer getCrediti() {
 		return crediti;
 	}
 
-
 	public void setCrediti(Integer crediti) {
 		this.crediti = crediti;
 	}
-
 
 	public String getNome() {
 		return nome;
 	}
 
-
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
 
 	public Integer getPd() {
 		return pd;
 	}
 
-
 	public void setPd(Integer pd) {
 		this.pd = pd;
 	}
-
 
 	@Override
 	public String toString() {
 		return "Corso [codins=" + codins + ", crediti=" + crediti + ", nome=" + nome + ", pd=" + pd + "]";
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -68,7 +61,6 @@ public class Corso {
 		result = prime * result + ((codins == null) ? 0 : codins.hashCode());
 		return result;
 	}
-
 
 	@Override
 	public boolean equals(Object obj) {
@@ -86,8 +78,6 @@ public class Corso {
 			return false;
 		return true;
 	}
-	
-	
 	
 	
 }

@@ -13,59 +13,73 @@ import it.polito.tdp.corsi.model.Corso;
 
 public class CorsoDAO {
 	
-	public List<Corso> getCorsiByPeriodo(Integer pd){
+	
+	/**
+	 * Dato un periodo didattico, fornisce l'elenco dei corsi tenuti in quel periodo
+	 * @param pd numero di riferimento per il periodo didattico
+	 * @return elenco dei corsi
+	 */
+	public List<Corso> getCorsiByperiodo(Integer pd){
 		
-		String sql = "select * from corso where pd = ?";
-		List<Corso> result = new ArrayList<Corso>();
+		//query opportuna
+		String sql="SELECT * FROM corso WHERE pd= ?"; 
+		
+		List<Corso> risultato= new ArrayList<>(); 
 		
 		try {
-			Connection conn = ConnectDB.getConnection();
-			PreparedStatement st = conn.prepareStatement(sql);
-			st.setInt(1, pd);
-			ResultSet rs = st.executeQuery();
+			Connection conn= ConnectDB.getConnection(); 
+			PreparedStatement st= conn.prepareStatement(sql); 
+			st.setInt(1,  pd);
+			ResultSet res= st.executeQuery(); 
 			
-			while(rs.next()) {
-				Corso c = new Corso(rs.getString("codins"), rs.getInt("crediti"), rs.getString("nome"), rs.getInt("pd"));
-				result.add(c);
+			while(res.next()) {
+				Corso c= new Corso(res.getString("codins"), res.getInt("crediti"),
+						res.getString("nome"), res.getInt("pd"));
+				
+				risultato.add(c); 
 			}
 			
-			conn.close();
+			conn.close(); 
 			
 		} catch(SQLException e) {
-			throw new RuntimeException(e);
+			throw new RuntimeException(); 
 		}
+		return risultato; 
 		
-		return result;
+		
 		
 	}
 	
-	public Map<Corso, Integer> getIscrittiByPeriodo(Integer pd){
-		String sql = "select c.codins, c.nome, c.crediti, c.pd, COUNT(*) as tot " + 
-				"from corso as c, iscrizione i " + 
-				"where c.codins = i.codins and c.pd = ? " + 
-				"group by c.codins, c.nome, c.crediti, c.pd ";
-		Map<Corso, Integer> result = new HashMap<Corso,Integer>();
+	public Map<Corso, Integer> getIscrittiCorsoByPeriodo(Integer pd){
+		
+		String sql= "SELECT c.codins, c.nome, c.crediti, c.pd, COUNT(*) AS tot " + 
+				"FROM corso as c, iscrizione i " + 
+				"WHERE c.codins=i.codins AND c.pd= ? " + 
+				"GROUP BY c.codins, c.nome, c.crediti, c.pd "; // tolgo io tutti i \n ma metto gli spazi altrimenti in SQL non lo prende
+	
+		Map<Corso, Integer> risultato= new HashMap<Corso, Integer>(); 
 		
 		try {
-			Connection conn = ConnectDB.getConnection();
-			PreparedStatement st = conn.prepareStatement(sql);
+			Connection conn= ConnectDB.getConnection(); 
+			PreparedStatement st= conn.prepareStatement(sql); 
 			st.setInt(1, pd);
-			ResultSet rs = st.executeQuery();
+			ResultSet res= st.executeQuery(); 
 			
-			while(rs.next()) {
-				Corso c = new Corso(rs.getString("codins"), rs.getInt("crediti"), rs.getString("nome"), rs.getInt("pd"));
-				Integer n = rs.getInt("tot");
-				result.put(c, n);
+			while(res.next()) {
+				Corso c= new Corso(res.getString("codins"), res.getInt("crediti"), 
+						res.getString("nome"), res.getInt("pd")); 
+				Integer tot= res.getInt("tot"); // relativo alal nuova colonna di conto
+				
+				risultato.put(c,tot); 
 			}
-			
 			conn.close();
+		}catch(SQLException e) {
+			throw new RuntimeException(); 
 			
-		} catch(SQLException e) {
-			throw new RuntimeException(e);
+			
 		}
-		
-		return result;
-	}
+		return risultato; 
 	
+	}
 
 }
