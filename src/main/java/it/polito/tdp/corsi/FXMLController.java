@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import it.polito.tdp.corsi.model.Corso;
 import it.polito.tdp.corsi.model.Model;
+import it.polito.tdp.corsi.model.Studente;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -112,11 +113,51 @@ public class FXMLController {
 
     @FXML
     void stampaDivisione(ActionEvent event) {
+    	// OUTPUT : Elenco di CDS con a fianco il numero di studenti appartenenti
+    	// Tdp : Informatica 12
+    	//       Gestionali 89
+    	
+            txtRisultato.clear(); 
+    	
+    	String codins= txtCorso.getText(); 
+    	
+    	// controllare che sia ok ( se lo faccio qui e' meglio perche' se passo e non esiste non so distinguere se la lista mi ritorna vuota perche' il corso non esiste o se ho sbagliato a scrivere l'input)
+    	if (!this.model.esisteCorso(codins)) {
+    		txtRisultato.appendText("Il corso non esiste!! \n");
+    		return; 
+    	}
+    	
+    	
+    	Map<String, Integer> stat= this.model.getDivisioneCDS(new Corso(codins, null, null, null)); 
 
+    	for (String cds : stat.keySet()) {
+    		txtRisultato.appendText(cds+" "+stat.get(cds)+"\n");
+    		
+    	}
     }
 
     @FXML
     void stampaStudenti(ActionEvent event) {
+    	
+    	txtRisultato.clear(); 
+    	
+    	String codins= txtCorso.getText(); 
+    	
+    	// controllare che sia ok ( se lo faccio qui e' meglio perche' se passo e non esiste non so distinguere se la lista mi ritorna vuota perche' il corso non esiste o se ho sbagliato a scrivere l'input)
+    	if (!this.model.esisteCorso(codins)) {
+    		txtRisultato.appendText("Il corso non esiste!! \n");
+    		return; 
+    	}
+    	List<Studente> studenti= this.model.getStudentiByCorso(new Corso(codins, null, null, null)); 
+    	if (studenti.size()==0) {
+    		txtRisultato.appendText("Il corso non ha studenti iscritti! \n");
+    		return; 
+    	}
+    	// esistono studenti
+    	for (Studente s : studenti) {
+    		txtRisultato.appendText(s.toString()+"\n");
+    	}
+    	
 
     }
 
